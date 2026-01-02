@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Una ang Ginoo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-container fade">
+    <h1>Una ang Ginoo</h1>
+    <p class="quote">"Jesus loves us"</p>
+
+    <form onsubmit="return login()">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+
+        <div class="login-options">
+            <label>
+                <input type="checkbox" id="rememberMe"> Remember me
+            </label>
+            <a href="#" onclick="forgotPassword()">Forgot password?</a>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+</div>
+
+<script>
+
+window.onload = function () {
+    const savedUser = localStorage.getItem("rememberedUser");
+    if (savedUser) {
+        document.getElementById("username").value = savedUser;
+        document.getElementById("rememberMe").checked = true;
+    }
+};
+
+function login() {
+    const user = "claire";
+    const pass = "1213";
+
+    const inputUser = document.getElementById("username").value;
+    const inputPass = document.getElementById("password").value;
+    const remember = document.getElementById("rememberMe").checked;
+
+    if (inputUser === user && inputPass === pass) {
+        if (remember) {
+            localStorage.setItem("rememberedUser", inputUser);
+            localStorage.setItem("rememberedPassword", inputUser);
+        } else {
+            localStorage.removeItem("rememberedUser");
+        }
+
+        alert("Login successful!\nUna ang Ginoo.");
+        window.location.href = "index.html";
+        return false;
+    } else {
+        alert("Invalid username or password");
+        return false;
+    }
+}
+
+function forgotPassword() {
+    alert("Forgot Password\n\nThis is a sample login page.\nUsername: admin\nPassword: 1234");
+}
+</script>
+
+</body>
+</html>
